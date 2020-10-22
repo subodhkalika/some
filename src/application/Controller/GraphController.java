@@ -37,9 +37,9 @@ public class GraphController {
 			try {
 //				this.view.getValue();
 				int frequencyValue = 3;
-				HashMap<String, Integer> freqyencyMap = this.model.findKeywordFrequency(selectedFile, keyword, frequencyValue);
-				BarChartView barChartView = new BarChartView(freqyencyMap);
-				barChartView.drawBarChart();
+				HashMap<String, Integer> frequencyMap = this.model.findKeywordFrequency(selectedFile, keyword, frequencyValue);
+				BarChartView barChartView = new BarChartView();
+				barChartView.drawBarChart(frequencyMap);
 			}
 			catch (Exception e1) {
 				e1.printStackTrace();
@@ -47,8 +47,10 @@ public class GraphController {
 		});
 
 		this.view.btnPieChartListener(e -> {
-			PieChartView pieChartView = new PieChartView(freqyencyMap);
-			pieChartView.drawPieChart();
+			int frequencyValue = 3;
+			HashMap<String, Integer> frequencyMap = this.model.findKeywordFrequency(selectedFile, keyword, frequencyValue);
+			PieChartView pieChartView = new PieChartView();
+			pieChartView.drawPieChart(frequencyMap);
 		});
 	}
 }

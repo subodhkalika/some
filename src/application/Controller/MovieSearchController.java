@@ -39,7 +39,7 @@ public class MovieSearchController {
 		this.view.btnGotoGraphListener(e -> { 
 			GraphView graphView = new GraphView();
 			GraphModel graphModel = new GraphModel();
-			GraphController graphController = new GraphController(graphView, graphModel, this.selectedFile, stage, keyword);
+			GraphController graphController = new GraphController(graphView, graphModel, selectedFile, stage, keyword);
 
 			Scene scene = new Scene(graphView.asParent(), 500, 500);
 
