@@ -1,5 +1,7 @@
 package application.View;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -97,5 +99,13 @@ public class GraphView {
 	
 	public int getYField() {
 		return Integer.parseInt(yField.getText());
+	}
+	
+	public void btnBarChartListener(EventHandler<ActionEvent> listener) {
+		btnBarChart.setOnAction(listener);
+	}
+	
+	public void btnPieChartListener(EventHandler<ActionEvent> listener) {
+		btnPieChart.setOnAction(listener);
 	}
 }
