@@ -16,7 +16,6 @@ public class ChooseSourceController {
 	private ChooseSourceView view;
 	private ChooseSourceModel model;
 	private Stage stage;
-	MoviesStore hashMapStore = new MoviesStore();
 
 	File selectedFile = null;
 	
@@ -36,14 +35,14 @@ public class ChooseSourceController {
 		this.view.btnLoadListener(e -> {
 			this.view.clearTextBox();
 			this.view.setGotoMovieDisable(false);
-			String extractedContent = this.model.parseXMLFile(this.selectedFile, this.hashMapStore.movieTitles);
+			String extractedContent = this.model.parseXMLFile(this.selectedFile);
 			this.view.addContentToTextBox(extractedContent);
 		});
 		
 		this.view.btnGotoMovieListener(e -> { 
 			MovieSearchView movieSearchView = new MovieSearchView();
 			MovieSearchModel movieSearchModel = new MovieSearchModel();
-			MovieSearchController movieSearchController = new MovieSearchController(movieSearchView, movieSearchModel, this.selectedFile, stage, this.hashMapStore.movieTitles);
+			MovieSearchController movieSearchController = new MovieSearchController(movieSearchView, movieSearchModel, this.selectedFile, stage);
 			
 			Scene scene = new Scene(movieSearchView.asParent(), 500, 500);
 			

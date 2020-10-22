@@ -1,5 +1,7 @@
 package application.View;
 
+import java.util.HashMap;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Side;
@@ -14,14 +16,15 @@ import javafx.scene.chart.PieChart.Data;
 import javafx.stage.Stage;
 
 public class PieChartView {
-	public void drawPieChart() {
+	public void drawPieChart(HashMap<String, Integer> freqyencyMap) {
 		try {
 			ObservableList<Data> list = FXCollections.observableArrayList();
 	
+			//do dynamic using freqyencyMap
 			list.addAll(new PieChart.Data("Iris-setosa", 12), 
 						new PieChart.Data("Iris-versicolor", 14),
 						new PieChart.Data("Iris-virginica", 15));
-	
+
 			PieChart pieChart = new PieChart();
 			pieChart.setData(list);
 			pieChart.setLegendSide(Side.LEFT);

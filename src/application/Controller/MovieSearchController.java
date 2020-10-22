@@ -16,18 +16,17 @@ public class MovieSearchController {
 	private MovieSearchView view;
 	private MovieSearchModel model;
 	private Stage stage;
-	
-	MoviesStore hashMapStore = new MoviesStore();
+	private String keyword;
 
 	File selectedFile = null;
 
-	public MovieSearchController(MovieSearchView view, MovieSearchModel model, File selectedFile, Stage stage, HashMap<String, ArrayList<String>> movieTitles) {
+	public MovieSearchController(MovieSearchView view, MovieSearchModel model, File selectedFile, Stage stage) {
 		this.view = view;
 		this.model = model;
 		this.stage = stage;
 
 		this.view.btnSearchMovieListener(e -> {
-			String keyword = this.view.getSearchKeyword();
+			keyword = this.view.getSearchKeyword();
 			this.view.clearMovieResults();
 			System.out.println(this.view.getTextAreaSearchResult().getText());
 
@@ -35,12 +34,12 @@ public class MovieSearchController {
 			for (String movieTitle : matchedMovieTitles) {
 				this.view.addToMovieResults(movieTitle);
 			}
-		});	
+		});
 		
 		this.view.btnGotoGraphListener(e -> { 
 			GraphView graphView = new GraphView();
 			GraphModel graphModel = new GraphModel();
-			GraphController graphController = new GraphController(graphView, graphModel, this.selectedFile, stage, this.hashMapStore.movieTitles);
+			GraphController graphController = new GraphController(graphView, graphModel, this.selectedFile, stage, keyword);
 
 			Scene scene = new Scene(graphView.asParent(), 500, 500);
 

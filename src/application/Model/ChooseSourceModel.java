@@ -23,7 +23,7 @@ public class ChooseSourceModel {
 	private String content = "";
 	private ArrayList<String> titles = new ArrayList<String>();
 
-	public String parseXMLFile(File selectedFile, HashMap<String, ArrayList<String>> movieTitles) {
+	public String parseXMLFile(File selectedFile) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder = null;
 		try {
@@ -91,7 +91,6 @@ public class ChooseSourceModel {
 	               this.addToContent(generes, true);
 	            }
 	         }
-	        this.saveInStore(movieTitles);
 		} catch (SAXException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -101,11 +100,6 @@ public class ChooseSourceModel {
 		}
 		
 		return this.content;
-	}
-
-	private void saveInStore(HashMap<String, ArrayList<String>> movieTitles) {
-		MoviesController mc = new MoviesController();
-		mc.saveInHashMap("titles", this.titles, movieTitles);
 	}
 
 	public void addToContent(String content, Boolean withNewLine) {

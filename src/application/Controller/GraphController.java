@@ -28,14 +28,17 @@ public class GraphController {
 	private GraphModel model;
 	private Stage stage;
 	
-	public GraphController(GraphView view, GraphModel model, File selectedFile, Stage stage, HashMap<String, ArrayList<String>> movieTitles) {
+	public GraphController(GraphView view, GraphModel model, File selectedFile, Stage stage, String keyword) {
 		this.view = view;
 		this.model = model;
 		this.stage = stage;
 		
 		this.view.btnBarChartListener(e -> {
 			try {
-				BarChartView barChartView = new BarChartView();
+//				this.view.getValue();
+				int frequencyValue = 3;
+				HashMap<String, Integer> freqyencyMap = this.model.findKeywordFrequency(selectedFile, keyword, frequencyValue);
+				BarChartView barChartView = new BarChartView(freqyencyMap);
 				barChartView.drawBarChart();
 			}
 			catch (Exception e1) {
@@ -44,7 +47,7 @@ public class GraphController {
 		});
 
 		this.view.btnPieChartListener(e -> {
-			PieChartView pieChartView = new PieChartView();
+			PieChartView pieChartView = new PieChartView(freqyencyMap);
 			pieChartView.drawPieChart();
 		});
 	}
