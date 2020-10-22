@@ -102,6 +102,10 @@ public class MovieSearchView {
 		return textFieldSearchKeyword.getText();
 	}
 
+	public void clearMovieResults() {
+		textAreaSearchResult.setText("");
+	}
+
 	public void btnSearchMovieListener(EventHandler<ActionEvent> listener) {
 		btnSearchMovie.setOnAction(listener);
 	}
