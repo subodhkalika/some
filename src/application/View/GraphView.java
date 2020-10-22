@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
@@ -24,7 +23,12 @@ public class GraphView {
 	private Button btnBarChart;
 	private Button btnPieChart;
 	private Label labelSelectChart;
-
+	private ToggleGroup group;
+	private RadioButton rb1; 
+	private RadioButton rb2; 
+	private RadioButton rb3; 
+	private RadioButton rb4; 
+	
 	/**
 	 * Constructor
 	 */
@@ -55,20 +59,24 @@ public class GraphView {
 		btnPieChart = new Button("Pie Chart");
 		//graph
 
-		final ToggleGroup group = new ToggleGroup();
+		group = new ToggleGroup();
 
-		RadioButton rb1 = new RadioButton("Top-3 correlated keywords");
+		rb1 = new RadioButton("Top-3 correlated keywords");
 		rb1.setToggleGroup(group);
 		rb1.setSelected(true);
-
-		RadioButton rb2 = new RadioButton("Top-5 correlated keywords");
+		rb1.setUserData("TOP_3");
+		
+		rb2 = new RadioButton("Top-5 correlated keywords");
 		rb2.setToggleGroup(group);
-		    
-		RadioButton rb3 = new RadioButton("Top-8 correlated keywords");
+		rb2.setUserData("TOP_5");
+		
+		rb3 = new RadioButton("Top-8 correlated keywords");
 		rb3.setToggleGroup(group);
-
-		RadioButton rb4 = new RadioButton("Top-10 correlated keywords");
+		rb3.setUserData("TOP_8");
+		
+		rb4 = new RadioButton("Top-10 correlated keywords");
 		rb4.setToggleGroup(group);
+		rb4.setUserData("TOP_10");
 
 		hboxGraphButtons = new HBox();
 		hboxGraphButtons.setSpacing(20);
@@ -99,6 +107,10 @@ public class GraphView {
 	
 	public int getYField() {
 		return Integer.parseInt(yField.getText());
+	}
+	
+	public String getSelectedRadioBtnValue() {
+		return this.group.getSelectedToggle().getUserData().toString();
 	}
 	
 	public void btnBarChartListener(EventHandler<ActionEvent> listener) {

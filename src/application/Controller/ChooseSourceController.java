@@ -6,7 +6,6 @@ import application.Model.ChooseSourceModel;
 import application.Model.MovieSearchModel;
 import application.View.ChooseSourceView;
 import application.View.MovieSearchView;
-import application.Store.MoviesStore;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;

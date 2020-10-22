@@ -5,7 +5,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -56,6 +55,7 @@ public class MovieSearchView {
 		btnSearchMovie = new Button("Search");
 		textAreaSearchResult = new TextArea();
 		btnGotoGraph = new Button("Goto graph Page");
+		btnGotoGraph.setDisable(true);
 
 		hboxSearchMovie = new HBox();
 		hboxSearchMovie.setSpacing(20);
@@ -88,6 +88,10 @@ public class MovieSearchView {
 	
 	public int getYField() {
 		return Integer.parseInt(yField.getText());
+	}
+	
+	public void setBtnGotoGraphDisable(Boolean isDisable) {
+		btnGotoGraph.setDisable(isDisable);
 	}
 	
 	public TextArea getTextAreaSearchResult() {

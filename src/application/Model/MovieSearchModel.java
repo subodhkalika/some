@@ -18,21 +18,10 @@ import org.xml.sax.SAXException;
 public class MovieSearchModel {
 	
 	private ArrayList<String> titles = new ArrayList<String>();
+	private ArrayList<String> keywords = new ArrayList<String>();
+	private HashMap<String, ArrayList<String>> movieResults = new HashMap<String, ArrayList<String>>();
 
-	public ArrayList<String> searchIn(HashMap<String, ArrayList<String>> movieTitles, String keyword) {
-		ArrayList<String> matchedTitles = new ArrayList<String>();
-		for (String i : movieTitles.keySet()) {
-			System.out.println("key: " + i + " value: " + movieTitles.get(i));
-			for (String title : movieTitles.get(i)) {
-				if(title.toLowerCase().contains(keyword)) {
-					matchedTitles.add(title);
-				}
-			}
-		}
-		return matchedTitles;
-	}
-
-	public ArrayList<String> parseXMLFile(File selectedFile, String keyword) {
+	public HashMap<String, ArrayList<String>> searchIn(File selectedFile, String keyword) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder = null;
 		try {
@@ -52,6 +41,16 @@ public class MovieSearchModel {
 	               String movieTitle = eElement.getElementsByTagName("title").item(0).getTextContent();
 	               if(movieTitle.toLowerCase().contains(keyword.toLowerCase())) {	
 						this.titles.add(movieTitle);
+						
+						//Extract all keywords for matched title
+						NodeList keywordList = eElement.getElementsByTagName("kws");
+		            	for (int count = 0; count < keywordList .getLength(); count++) {
+		            	    Node nodeKw = keywordList.item(count); 
+		            	    if (nodeKw.getNodeType() == nodeKw.ELEMENT_NODE) {
+		                         Element kw = (Element) nodeKw;
+		                         this.keywords.add(kw.getElementsByTagName("kw").item(0).getTextContent());
+		            	    }   
+		            	}
 					}
 	            }
 	        }
@@ -63,6 +62,9 @@ public class MovieSearchModel {
 			e1.printStackTrace();
 		}
 		
-		return this.titles;
+		movieResults.put("titles", this.titles);
+		movieResults.put("keywords", this.keywords);
+
+		return movieResults;
 	}
 }
