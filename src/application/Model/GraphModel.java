@@ -4,18 +4,28 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-
 import org.xml.sax.SAXException;
-
 import application.Handler.MovieHandler;
 
+/**
+ * Model for Movie Search page
+ *
+ * @author 	Subodh Kalika (102875446)
+ * @author 	Sandesh Dhoju (102840091)
+ * @version 2020.10.20
+ */
 public class GraphModel {
-	HashMap<String, Integer> freqyencyMap = new HashMap<String, Integer>(); 
-			
+	HashMap<String, Integer> frequencyMap = new HashMap<String, Integer>(); 
+	
+	/**
+	 * find the frequency of each keyword in the IMDB database
+	 *
+	 * @param File 							selected file from choose source page
+	 * @return HashMap<String, Integer>		frequencyMap with title and frequency
+	 */
 	public HashMap<String, Integer> findKeywordFrequency(File selectedFile) {
 		//obtain and configure a SAX based Parser 
 		SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -43,7 +53,7 @@ public class GraphModel {
 						}       
 					}
 					//store frequency of keyword
-					freqyencyMap.put(singleKeyword, keywordCount);
+					frequencyMap.put(singleKeyword, keywordCount);
 				}
 			} catch (SAXException e1) {
 				// TODO Auto-generated catch block
@@ -53,9 +63,16 @@ public class GraphModel {
 				e1.printStackTrace();
 			}
 		
-		return this.freqyencyMap;
+		return this.frequencyMap;
 	}
 	
+	/**
+	 * sort keywords descending order of frequency
+	 *
+	 * @param ArrayList<String> 			matchedKeywords from the search page
+	 * @param HashMap<String, Integer> 		frequenciesMap with title and frequency
+	 * @return ArrayList<String> 			sorted matchedKeywords in descending order of frequency
+	 */
 	public ArrayList<String> getSortedKeywords(ArrayList<String> matchedKeywords,HashMap<String, Integer> frequenciesMap) 
     { 
         int size = matchedKeywords.size(); 
@@ -75,6 +92,13 @@ public class GraphModel {
         return matchedKeywords;
     }
 	
+	/**
+	 * Method to get top n keywords
+	 *
+	 * @param string 				selectedCritera, value of radio button
+	 * @param ArrayList<String> 	keywords
+	 * @return ArrayList<String> 	topNkeyWords
+	 */
 	public ArrayList<String> getTopNKeywords(String selectedCriteria, ArrayList<String> keywords) {
 		int size = this.getValueOfNBySelectedCriteria(selectedCriteria);
 		ArrayList<String> topNkeyWords = new ArrayList<String>();
@@ -84,6 +108,12 @@ public class GraphModel {
 		return topNkeyWords;
 	}
 	
+	/**
+	 * Method to get top n keywords
+	 *
+	 * @param string 		selectedCritera, value of radio button
+	 * @return integer 	
+	 */
 	public int getValueOfNBySelectedCriteria(String selectedCriteria) {
 		if (selectedCriteria == "TOP_3") {
 			return 3;

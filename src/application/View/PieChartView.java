@@ -13,7 +13,21 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.PieChart.Data;
 import javafx.stage.Stage;
 
+/**
+ * View for piechart
+ *
+ * @author 	Subodh Kalika (102875446)
+ * @author 	Sandesh Dhoju (102840091)
+ * @version 2020.10.20
+ */
 public class PieChartView {
+
+	/**
+	 * method to draw piechart
+	 *
+	 * @param ArrayList<String> 			keywords
+	 * @param HashMap<String, Integer> 		frequencyMap
+	 */
 	public void drawPieChart(ArrayList<String> keyWords, HashMap<String, Integer> frequencyMap) {
 		try {
 			ObservableList<Data> list = FXCollections.observableArrayList();

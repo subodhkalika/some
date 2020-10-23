@@ -15,15 +15,25 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import application.Controller.MoviesController;
-
-
-
+/**
+ * Model for choose source page
+ *
+ * @author 	Subodh Kalika (102875446)
+ * @author 	Sandesh Dhoju (102840091)
+ * @version 2020.10.20
+ */
 public class ChooseSourceModel {
 	private String content = "";
 	private ArrayList<String> titles = new ArrayList<String>();
 
+	/**
+	 * parse XML file and get contents
+	 *
+	 * @param File			selected file from choose source page
+	 * @return string		extracted content
+	 */
 	public String parseXMLFile(File selectedFile) {
+		//Using DOM parser
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder = null;
 		try {
@@ -34,7 +44,6 @@ public class ChooseSourceModel {
 		try {
 			Document doc = docBuilder.parse(selectedFile.getPath());
 			doc.getDocumentElement().normalize();
-			
 			
 			this.addToContent("Root element :" + doc.getDocumentElement().getNodeName(), true);
 			
@@ -102,11 +111,21 @@ public class ChooseSourceModel {
 		return this.content;
 	}
 
+	/**
+	 * Method to concat text to the content to return by model with new line
+	 *
+	 * @param string 	content to be concat
+	 */
 	public void addToContent(String content, Boolean withNewLine) {
 		String additionalcontent = withNewLine ? "\n" + content : content;
 		this.content = this.content + additionalcontent;
 	}
 	
+	/**
+	 * Method to concat text to the content to return by model without new line
+	 *
+	 * @param string	content to be concat
+	 */
 	public void addToContent(String content) {
 		this.addToContent(content, false);
 	}

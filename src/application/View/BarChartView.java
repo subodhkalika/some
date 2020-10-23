@@ -11,7 +11,21 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
+/**
+ * View for Bar chart
+ *
+ * @author 	Subodh Kalika (102875446)
+ * @author 	Sandesh Dhoju (102840091)
+ * @version 2020.10.20
+ */
 public class BarChartView {
+
+	/**
+	 * method to draw bar chart
+	 *
+	 * @param ArrayList<String> 			keywords
+	 * @param HashMap<String, Integer> 		frequencyMap
+	 */
 	public void drawBarChart(ArrayList<String> keywords, HashMap<String, Integer> frequencyMap) {
 		CategoryAxis xAxis = new CategoryAxis();
 		NumberAxis yAxis = new NumberAxis();

@@ -12,6 +12,13 @@ import application.View.MovieSearchView;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Controller for movie search page
+ *
+ * @author 	Subodh Kalika (102875446)
+ * @author 	Sandesh Dhoju (102840091)
+ * @version 2020.10.20
+ */
 public class MovieSearchController {
 	private MovieSearchView view;
 	private MovieSearchModel model;
@@ -19,10 +26,22 @@ public class MovieSearchController {
 
 	File selectedFile = null;
 
+	/**
+	 * Constructor for MovieSearchController
+	 *
+	 * @param MovieSearchView 		view
+	 * @param MovieSearchModel 		model
+	 * @param File 					selectedFile
+	 * @param Stage 				stage
+	 */
 	public MovieSearchController(MovieSearchView view, MovieSearchModel model, File selectedFile, Stage stage) {
 		this.view = view;
 		this.model = model;
-		MoviesStore mvs = new MoviesStore();
+
+		MoviesStore mvs = new MoviesStore();		// instantiation of movie store
+		
+		// search in IMDB database
+		// listener for search button
 		this.view.btnSearchMovieListener(e -> {
 			keyword = this.view.getSearchKeyword();
 			this.view.clearMovieResults();
@@ -37,6 +56,8 @@ public class MovieSearchController {
 			this.view.setBtnGotoGraphDisable(false);
 		});
 		
+		// load graph view
+		// listener for goto graph button
 		this.view.btnGotoGraphListener(e -> { 
 			GraphView graphView = new GraphView();
 			GraphModel graphModel = new GraphModel();

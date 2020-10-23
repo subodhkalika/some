@@ -12,13 +12,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
+/**
+ * View for Movie search page
+ *
+ * @author 	Subodh Kalika (102875446)
+ * @author 	Sandesh Dhoju (102840091)
+ * @version 2020.10.20
+ */
 public class MovieSearchView {
 	
 	private GridPane view;
-	private TextField xField;
-	private TextField yField;
 	
-	//label
+	// View datamembers
 	private HBox hboxSearchMovie;
 	private HBox hboxActionButtons;
 	private Label labelSearchKeyword;
@@ -28,7 +33,7 @@ public class MovieSearchView {
 	private Button btnGotoGraph;
 
 	/**
-	 * Constructor
+	 * Constructor for MovieSearchView
 	 */
 	public MovieSearchView() {
 		createAndConfigurePane();
@@ -46,6 +51,7 @@ public class MovieSearchView {
 	
 	/**
 	 * Method to create layout for view
+	 *
 	 */
 	private void createAndLayoutControls() {
 		//View Components initialization
@@ -73,6 +79,7 @@ public class MovieSearchView {
 	
 	/**
 	 * Method to create and configure grid pane 
+	 *
 	 */
 	private void createAndConfigurePane() {
 		view = new GridPane();
@@ -82,40 +89,56 @@ public class MovieSearchView {
 		view.setVgap(10);		
 	}
 	
-	public int getXField() {
-		return Integer.parseInt(xField.getText());
-	}
-	
-	public int getYField() {
-		return Integer.parseInt(yField.getText());
-	}
-	
+	/**
+	 * Method to disable/enable btnGotoGraph button
+	 *
+	 * @param boolean 		isDisable flag to disable/enable btnGotoGraph button
+	 */
 	public void setBtnGotoGraphDisable(Boolean isDisable) {
 		btnGotoGraph.setDisable(isDisable);
 	}
 	
-	public TextArea getTextAreaSearchResult() {
-		return textAreaSearchResult;
-	}
-	
+	/**
+	 * Method to add text to movie results textarea
+	 *
+	 * @param string 		content to be updated on textAreaSearchResult
+	 */
 	public void addToMovieResults(String content) {
 		textAreaSearchResult.setText(textAreaSearchResult.getText() + content + "\n");
 	}
 
+	/**
+	 * Method to get search keyword value form  text field
+	 *
+	 * @return string
+	 */
 	public String getSearchKeyword() {
 		return textFieldSearchKeyword.getText();
 	}
 
+	/**
+	 * Method to clear movie results text area
+	 *
+	 */
 	public void clearMovieResults() {
 		textAreaSearchResult.setText("");
 	}
 
+	/**
+	 * Set Listener for button search
+	 *
+	 * @param EventHandler<ActionEvent> 		listener event
+	 */
 	public void btnSearchMovieListener(EventHandler<ActionEvent> listener) {
 		btnSearchMovie.setOnAction(listener);
 	}
 	
+	/**
+	 * Set Listener for button go to graph
+	 *
+	 * @param EventHandler<ActionEvent> 		listener event
+	 */
 	public void btnGotoGraphListener(EventHandler<ActionEvent> listener) {
 		btnGotoGraph.setOnAction(listener);
 	}
-	
 }

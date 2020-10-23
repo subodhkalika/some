@@ -9,13 +9,19 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
 /**
- * Main Class
- * @author Sandesh Dhoju (102840091)
- * @author Subodh Kalika (102875446)
- * 
+ * XMLKeywordSearchApplication Class
+ *
+ * @author 	Subodh Kalika (102875446)
+ * @author 	Sandesh Dhoju (102840091)
  * @version 2020.10.20
  */
 public class XMLKeywordSearchApplication extends Application {
+	
+	/**
+	 * start method
+	 *
+	 * @param Stage 	stage
+	 */
 	@Override
 	public void start(Stage stage) {
 		try {
@@ -23,7 +29,7 @@ public class XMLKeywordSearchApplication extends Application {
 			ChooseSourceModel chooseSourceModel = new ChooseSourceModel();
 			ChooseSourceController chooseSourceController = new ChooseSourceController(chooseSourceView, chooseSourceModel, stage);
 			
-			Scene scene = new Scene(chooseSourceView.asParent(), 300, 300);
+			Scene scene = new Scene(chooseSourceView.asParent(), 300, 300);		// instantiate new scene for choose source page
 			
 			stage.setScene(scene);
 			stage.setTitle("XML Keyword Search System");
@@ -33,6 +39,11 @@ public class XMLKeywordSearchApplication extends Application {
 		}
 	}
 	
+	/**
+	 * Main method to launch the application
+	 *
+	 * @param args 		command line argument
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

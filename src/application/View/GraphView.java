@@ -13,11 +13,15 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
+/**
+ * View for Graph page
+ *
+ * @author 	Subodh Kalika (102875446)
+ * @author 	Sandesh Dhoju (102840091)
+ * @version 2020.10.20
+ */
 public class GraphView {
 	private GridPane view;
-
-	private TextField xField;
-	private TextField yField;
 
 	private HBox hboxGraphButtons;
 	private Button btnBarChart;
@@ -30,7 +34,7 @@ public class GraphView {
 	private RadioButton rb4; 
 	
 	/**
-	 * Constructor
+	 * Constructor for GraphView
 	 */
 	public GraphView() {
 		createAndConfigurePane();
@@ -48,6 +52,7 @@ public class GraphView {
 	
 	/**
 	 * Method to create layout for view
+	 *
 	 */
 	private void createAndLayoutControls() {
 		//View Components initialization
@@ -92,6 +97,7 @@ public class GraphView {
 	
 	/**
 	 * Method to create and configure grid pane 
+	 *
 	 */
 	private void createAndConfigurePane() {
 		view = new GridPane();
@@ -101,22 +107,29 @@ public class GraphView {
 		view.setVgap(10);		
 	}
 	
-	public int getXField() {
-		return Integer.parseInt(xField.getText());
-	}
-	
-	public int getYField() {
-		return Integer.parseInt(yField.getText());
-	}
-	
+	/**
+	 * Method to get radio button value
+	 *
+	 * @return string
+	 */
 	public String getSelectedRadioBtnValue() {
 		return this.group.getSelectedToggle().getUserData().toString();
 	}
 	
+	/**
+	 * Set Listener for button bar chart
+	 *
+	 * @param EventHandler<ActionEvent> 		listener event
+	 */
 	public void btnBarChartListener(EventHandler<ActionEvent> listener) {
 		btnBarChart.setOnAction(listener);
 	}
 	
+	/**
+	 * Set Listener for button pie chart
+	 *
+	 * @param EventHandler<ActionEvent> 		listener event
+	 */
 	public void btnPieChartListener(EventHandler<ActionEvent> listener) {
 		btnPieChart.setOnAction(listener);
 	}
