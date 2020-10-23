@@ -1,5 +1,6 @@
 package application.View;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javafx.scene.Group;
@@ -11,7 +12,7 @@ import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
 public class BarChartView {
-	public void drawBarChart(HashMap<String, Integer> freqyencyMap) {
+	public void drawBarChart(ArrayList<String> keywords, HashMap<String, Integer> frequencyMap) {
 		CategoryAxis xAxis = new CategoryAxis();
 		NumberAxis yAxis = new NumberAxis();
 		xAxis.setLabel("Search Keyword");
@@ -23,9 +24,9 @@ public class BarChartView {
 		XYChart.Series<String, Integer> series = new XYChart.Series<>();
 
 		//do dynamic using freqyencyMap
-		series.getData().add(new XYChart.Data("Iris-setosa",12));
-		series.getData().add(new XYChart.Data("Iris-versicolor",15));	
-		series.getData().add(new XYChart.Data("Iris-virginica",12));	
+		for(String kw: keywords) {
+			series.getData().add(new XYChart.Data(kw, frequencyMap.get(kw)));
+		}
 		
 		series.setName("Frequency");
 

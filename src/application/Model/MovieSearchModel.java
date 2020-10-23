@@ -43,14 +43,15 @@ public class MovieSearchModel {
 						this.titles.add(movieTitle);
 						
 						//Extract all keywords for matched title
-						NodeList keywordList = eElement.getElementsByTagName("kws");
-		            	for (int count = 0; count < keywordList .getLength(); count++) {
-		            	    Node nodeKw = keywordList.item(count); 
-		            	    if (nodeKw.getNodeType() == nodeKw.ELEMENT_NODE) {
-		                         Element kw = (Element) nodeKw;
-		                         this.keywords.add(kw.getElementsByTagName("kw").item(0).getTextContent());
-		            	    }   
-		            	}
+						NodeList keywordLists = eElement.getElementsByTagName("kw");
+	            	   	for (int count = 0; count < keywordLists.getLength(); count++) {		            		   
+							Node nodeItem = keywordLists.item(count); 
+							if (nodeItem.getNodeType() == nodeItem.ELEMENT_NODE) {
+								Element item = (Element) nodeItem;
+								String movieKw= item.getTextContent();
+								this.keywords.add(movieKw);		
+							}   
+	            	   	}
 					}
 	            }
 	        }
@@ -61,7 +62,6 @@ public class MovieSearchModel {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
 		movieResults.put("titles", this.titles);
 		movieResults.put("keywords", this.keywords);
 

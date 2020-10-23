@@ -17,24 +17,24 @@ public class GraphController {
 	public GraphController(GraphView view, GraphModel model, File selectedFile, Stage stage, ArrayList<String> matchedKeywords) {
 		this.view = view;
 		this.model = model;
+
+		HashMap<String, Integer> frequencyMap = this.model.findKeywordFrequency(selectedFile);
+		ArrayList<String> sortedKeywords = this.model.getSortedKeywords(matchedKeywords, frequencyMap);
 		
 		this.view.btnBarChartListener(e -> {
-			try {
-				String selectedCriteria = this.view.getSelectedRadioBtnValue();
-				HashMap<String, Integer> frequencyMap = this.model.findKeywordFrequency(selectedFile);
-				BarChartView barChartView = new BarChartView();
-				barChartView.drawBarChart(frequencyMap);
-			}
-			catch (Exception e1) {
-				e1.printStackTrace();
-			}
+			String selectedCriteria = this.view.getSelectedRadioBtnValue();
+			ArrayList<String> topNkeyWords = this.model.getTopNKeywords(selectedCriteria, sortedKeywords);
+			
+			BarChartView barChartView = new BarChartView();
+			barChartView.drawBarChart(topNkeyWords, frequencyMap);
 		});
 
 		this.view.btnPieChartListener(e -> {
 			String selectedCriteria = this.view.getSelectedRadioBtnValue();
-			HashMap<String, Integer> frequencyMap = this.model.findKeywordFrequency(selectedFile);
+			ArrayList<String> topNkeyWords = this.model.getTopNKeywords(selectedCriteria, sortedKeywords);
+			
 			PieChartView pieChartView = new PieChartView();
-			pieChartView.drawPieChart(frequencyMap);
+			pieChartView.drawPieChart(topNkeyWords, frequencyMap);
 		});
 	}
 }

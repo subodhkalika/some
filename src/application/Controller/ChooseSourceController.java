@@ -1,5 +1,5 @@
 package application.Controller;
-	
+
 import java.io.File;
 
 import application.Model.ChooseSourceModel;
@@ -17,17 +17,17 @@ public class ChooseSourceController {
 	private Stage stage;
 
 	File selectedFile = null;
-	
+
 	public ChooseSourceController(ChooseSourceView view, ChooseSourceModel model, Stage stage) {
 		this.view = view;
 		this.model = model;
 		this.stage = stage;
-		
+
 		this.view.btnSourceListener(e -> {
-			FileChooser  file = new FileChooser();
-			file.setTitle("Open File");		
-			selectedFile = file.showOpenDialog(this.stage); 
-			this.view.setSourceLabel(selectedFile.getName()); 
+			FileChooser file = new FileChooser();
+			file.setTitle("Open File");
+			selectedFile = file.showOpenDialog(this.stage);
+			this.view.setSourceLabel(selectedFile.getName());
 			this.view.setLoadButttonDisable(false);
 		});
 
@@ -37,17 +37,18 @@ public class ChooseSourceController {
 			String extractedContent = this.model.parseXMLFile(this.selectedFile);
 			this.view.addContentToTextBox(extractedContent);
 		});
-		
-		this.view.btnGotoMovieListener(e -> { 
+
+		this.view.btnGotoMovieListener(e -> {
 			MovieSearchView movieSearchView = new MovieSearchView();
 			MovieSearchModel movieSearchModel = new MovieSearchModel();
-			MovieSearchController movieSearchController = new MovieSearchController(movieSearchView, movieSearchModel, this.selectedFile, stage);
-			
-			Scene scene = new Scene(movieSearchView.asParent(), 500, 500);
-			
+			MovieSearchController movieSearchController = new MovieSearchController(movieSearchView, movieSearchModel,
+					this.selectedFile, stage);
+
+			Scene scene = new Scene(movieSearchView.asParent(), 300, 300);
+
 			stage.setScene(scene);
 			stage.setTitle("XML Keyword Search System");
 			stage.show();
-		});	
+		});
 	}
 }

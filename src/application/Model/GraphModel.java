@@ -56,7 +56,43 @@ public class GraphModel {
 		return this.freqyencyMap;
 	}
 	
-	public void getKeywordsFromSearch() {
-		
+	public ArrayList<String> getSortedKeywords(ArrayList<String> matchedKeywords,HashMap<String, Integer> frequenciesMap) 
+    { 
+        int size = matchedKeywords.size(); 
+        for (int i = 0; i < size-1; i++) {
+            for (int j = 0; j < size-i-1; j++) {
+            	String d = matchedKeywords.get(j);
+            	int x = frequenciesMap.get(d);
+            	int y = frequenciesMap.get(matchedKeywords.get(j+1));
+                if (x > y) {
+                    String temp = matchedKeywords.get(j); 
+                    matchedKeywords.set(j, matchedKeywords.get(j+1)); 
+                    matchedKeywords.set(j+1, temp);
+                }
+            }
+        }
+
+        return matchedKeywords;
+    }
+	
+	public ArrayList<String> getTopNKeywords(String selectedCriteria, ArrayList<String> keywords) {
+		int size = this.getValueOfNBySelectedCriteria(selectedCriteria);
+		ArrayList<String> topNkeyWords = new ArrayList<String>();
+		for(int i = 0; i < size; i++) {
+			topNkeyWords.add(keywords.get(i));
+		}
+		return topNkeyWords;
+	}
+	
+	public int getValueOfNBySelectedCriteria(String selectedCriteria) {
+		if (selectedCriteria == "TOP_3") {
+			return 3;
+		} else if (selectedCriteria == "TOP_5") {
+			return 5;
+		} else if (selectedCriteria == "TOP_8") {
+			return 8;
+		} else {
+			return 10;
+		}
 	}
 }

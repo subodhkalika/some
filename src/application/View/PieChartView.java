@@ -1,5 +1,6 @@
 package application.View;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javafx.collections.FXCollections;
@@ -8,18 +9,18 @@ import javafx.geometry.Side;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.chart.PieChart.Data;
 import javafx.stage.Stage;
 
 public class PieChartView {
-	public void drawPieChart(HashMap<String, Integer> freqyencyMap) {
+	public void drawPieChart(ArrayList<String> keyWords, HashMap<String, Integer> frequencyMap) {
 		try {
 			ObservableList<Data> list = FXCollections.observableArrayList();
 	
-			//do dynamic using freqyencyMap
-			list.add(new PieChart.Data("Iris-setosa", 12));
-			list.add(new PieChart.Data("Iris-versicolor", 14));
-			list.add(new PieChart.Data("Iris-virginica", 15));
+			for(String kw: keyWords) {
+				list.add(new PieChart.Data(kw, frequencyMap.get(kw)));
+			}
 
 			PieChart pieChart = new PieChart();
 			pieChart.setData(list);
