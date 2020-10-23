@@ -31,6 +31,7 @@ public class MovieSearchView {
 	private Button btnSearchMovie;
 	private TextArea textAreaSearchResult;
 	private Button btnGotoGraph;
+	private Button btnBack;
 
 	/**
 	 * Constructor for MovieSearchView
@@ -62,14 +63,15 @@ public class MovieSearchView {
 		textAreaSearchResult = new TextArea();
 		btnGotoGraph = new Button("Goto graph Page");
 		btnGotoGraph.setDisable(true);
-
+		btnBack = new Button("Back");
+		
 		hboxSearchMovie = new HBox();
 		hboxSearchMovie.setSpacing(20);
 		hboxSearchMovie.getChildren().addAll(textFieldSearchKeyword, btnSearchMovie);
 		
 		hboxActionButtons = new HBox();
 		hboxActionButtons .setSpacing(20);
-		hboxActionButtons .getChildren().addAll(btnGotoGraph);
+		hboxActionButtons .getChildren().addAll(btnBack, btnGotoGraph);
 		
 		view.addRow(0,labelSearchKeyword);
 		view.addRow(1,hboxSearchMovie);
@@ -99,12 +101,14 @@ public class MovieSearchView {
 	}
 	
 	/**
-	 * Method to add text to movie results textarea
+	 * Method to add text to movie results text area
 	 *
 	 * @param string 		content to be updated on textAreaSearchResult
 	 */
 	public void addToMovieResults(String content) {
-		textAreaSearchResult.setText(textAreaSearchResult.getText() + content + "\n");
+		textAreaSearchResult.clear();
+		textAreaSearchResult.setText(" ");
+		textAreaSearchResult.setText(content);
 	}
 
 	/**
@@ -124,6 +128,10 @@ public class MovieSearchView {
 		textAreaSearchResult.setText("");
 	}
 
+	public TextArea getTextArea() {
+		return textAreaSearchResult;
+	}
+	
 	/**
 	 * Set Listener for button search
 	 *
@@ -140,5 +148,14 @@ public class MovieSearchView {
 	 */
 	public void btnGotoGraphListener(EventHandler<ActionEvent> listener) {
 		btnGotoGraph.setOnAction(listener);
+	}
+	
+	/**
+	 * Set Listener for back button
+	 *
+	 * @param EventHandler<ActionEvent> 		listener event
+	 */
+	public void btnBackListener(EventHandler<ActionEvent> listener) {
+		btnBack.setOnAction(listener);
 	}
 }

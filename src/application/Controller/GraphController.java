@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import application.Model.GraphModel;
+import application.Model.MovieSearchModel;
 import application.View.BarChartView;
 import application.View.GraphView;
+import application.View.MovieSearchView;
 import application.View.PieChartView;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -55,6 +58,19 @@ public class GraphController {
 			
 			PieChartView pieChartView = new PieChartView();
 			pieChartView.drawPieChart(topNkeyWords, frequencyMap);
+		});
+		
+		this.view.btnBackListener(e -> { 
+			MovieSearchView movieSearchView = new MovieSearchView();
+			MovieSearchModel movieSearchModel = new MovieSearchModel();
+			MovieSearchController movieSearchController = new MovieSearchController(movieSearchView, movieSearchModel,
+					selectedFile, stage);
+
+			Scene scene = new Scene(movieSearchView.asParent(), 300, 300);
+
+			stage.setScene(scene);
+			stage.setTitle("XML Keyword Search System");
+			stage.show();
 		});
 	}
 }

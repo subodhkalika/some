@@ -24,8 +24,6 @@ import org.xml.sax.SAXException;
  */
 public class MovieSearchModel {
 	
-	private ArrayList<String> titles = new ArrayList<String>();
-	private ArrayList<String> keywords = new ArrayList<String>();
 	private HashMap<String, ArrayList<String>> movieResults = new HashMap<String, ArrayList<String>>();
 
 	/**
@@ -45,10 +43,15 @@ public class MovieSearchModel {
 		} catch (ParserConfigurationException e1) {
 			e1.printStackTrace();
 		}
+		
+		ArrayList<String> titles = new ArrayList<String>();
+		ArrayList<String> keywords = new ArrayList<String>();
+		
 		try {
 			Document doc = docBuilder.parse(selectedFile.getPath());
 			doc.getDocumentElement().normalize();
 			
+
 	        NodeList nList = doc.getElementsByTagName("movie");
 	        for (int temp = 0; temp < nList.getLength(); temp++) {
 	            Node nNode = nList.item(temp);
@@ -57,7 +60,7 @@ public class MovieSearchModel {
 	               String movieTitle = eElement.getElementsByTagName("title").item(0).getTextContent();
 	               
 				   if(movieTitle.toLowerCase().contains(keyword.toLowerCase())) {		
-						this.titles.add(movieTitle);	//add movie titles to array list
+						titles.add(movieTitle);	//add movie titles to array list
 						//Extract all keywords for matched title
 						NodeList keywordLists = eElement.getElementsByTagName("kw");
 	            	   	for (int count = 0; count < keywordLists.getLength(); count++) {		            		   
@@ -65,24 +68,37 @@ public class MovieSearchModel {
 							if (nodeItem.getNodeType() == nodeItem.ELEMENT_NODE) {
 								Element item = (Element) nodeItem;
 								String movieKw= item.getTextContent();
-								this.keywords.add(movieKw);		
+								keywords.add(movieKw);		
 							}   
 	            	   	}
 					}
 	            }
 	        }
 		} catch (SAXException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
 		// Store in hash map
-		movieResults.put("titles", this.titles);
-		movieResults.put("keywords", this.keywords);
-
+		this.saveInHashMap("keywords", keywords);
+		this.saveInHashMap("titles", titles);
 		return movieResults;
+	}
+	
+	/**
+	 * store each keyword (as the key) with its associated snippet
+	 * 
+	 * @param keyword	keyword to pass as a key in hash map
+	 * @param snippet	value of the key
+	 */
+	public void saveInHashMap(String keyword,ArrayList<String> list) {
+		ArrayList<String> keyValue = movieResults.get(keyword);
+		if(keyValue != null) {
+			movieResults.replace(keyword, list);
+		}
+		else {
+			movieResults.put(keyword, list);
+		}
 	}
 }

@@ -26,6 +26,7 @@ public class GraphView {
 	private HBox hboxGraphButtons;
 	private Button btnBarChart;
 	private Button btnPieChart;
+	private Button btnBack;
 	private Label labelSelectChart;
 	private ToggleGroup group;
 	private RadioButton rb1; 
@@ -59,10 +60,11 @@ public class GraphView {
 		//4 radio buttons
 		labelSelectChart = new Label("Select Chart");
 		
-		//2graph button
+		//graph button
 		btnBarChart = new Button("Bar Chart");
 		btnPieChart = new Button("Pie Chart");
-		//graph
+		
+		btnBack = new Button("Back");
 
 		group = new ToggleGroup();
 
@@ -93,6 +95,7 @@ public class GraphView {
 		view.addRow(3, rb4);
 		view.addRow(4,labelSelectChart);
 		view.addRow(5,hboxGraphButtons);
+		view.addRow(6, btnBack);
 	}
 	
 	/**
@@ -132,5 +135,14 @@ public class GraphView {
 	 */
 	public void btnPieChartListener(EventHandler<ActionEvent> listener) {
 		btnPieChart.setOnAction(listener);
+	}
+	
+	/**
+	 * Set Listener for back button
+	 *
+	 * @param EventHandler<ActionEvent> 		listener event
+	 */
+	public void btnBackListener(EventHandler<ActionEvent> listener) {
+		btnBack.setOnAction(listener);
 	}
 }

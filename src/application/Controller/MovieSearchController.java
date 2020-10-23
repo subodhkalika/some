@@ -4,9 +4,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import application.Model.ChooseSourceModel;
 import application.Model.GraphModel;
 import application.Model.MovieSearchModel;
 import application.Store.MoviesStore;
+import application.View.ChooseSourceView;
 import application.View.GraphView;
 import application.View.MovieSearchView;
 import javafx.scene.Scene;
@@ -44,15 +46,17 @@ public class MovieSearchController {
 		// listener for search button
 		this.view.btnSearchMovieListener(e -> {
 			keyword = this.view.getSearchKeyword();
-			this.view.clearMovieResults();
 			
 			HashMap<String, ArrayList<String>> searchResults = this.model.searchIn(selectedFile, keyword);
 			ArrayList<String> matchedMovieTitles = searchResults.get("titles");
 			mvs.matchedKeywords = searchResults.get("keywords");
-
+			
+			String searchResultsString = "";
 			for (String movieTitle : matchedMovieTitles) {
-				this.view.addToMovieResults(movieTitle);
+				searchResultsString+= movieTitle  + "\n";
 			}
+			
+			this.view.addToMovieResults(searchResultsString);
 			this.view.setBtnGotoGraphDisable(false);
 		});
 		
@@ -69,6 +73,18 @@ public class MovieSearchController {
 			stage.setScene(scene);
 			stage.setTitle("XML Keyword Search System");
 			stage.show();
-		});	
+		});
+		
+		this.view.btnBackListener(e -> { 
+			ChooseSourceView chooseSourceView = new ChooseSourceView();
+			ChooseSourceModel chooseSourceModel = new ChooseSourceModel();
+			ChooseSourceController chooseSourceController = new ChooseSourceController(chooseSourceView, chooseSourceModel, stage);
+			
+			Scene scene = new Scene(chooseSourceView.asParent(), 300, 300);		// instantiate new scene for choose source page
+			
+			stage.setScene(scene);
+			stage.setTitle("XML Keyword Search System");
+			stage.show();
+		});
 	}
 }
